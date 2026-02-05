@@ -3,33 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator</title>
+    <title>Engineering Multi-Calculator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <p> Changing this line by sambhav buddy</p>
-    <div id="calculator">
-      <input id="display" readonly />
-      <div id="keys">
-        <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
-        <button onclick="appendToDisplay('1')">1</button>
-        <button onclick="appendToDisplay('2')">2</button>
-        <button onclick="appendToDisplay('3')">3</button>
-        <button onclick="appendToDisplay('-')" class="operator-btn">-</button>
-        <button onclick="appendToDisplay('4')">4</button>
-        <button onclick="appendToDisplay('5')">5</button>
-        <button onclick="appendToDisplay('6')">6</button>
-        <button onclick="appendToDisplay('*')" class="operator-btn">*</button>
-        <button onclick="appendToDisplay('7')">7</button>
-        <button onclick="appendToDisplay('8')">8</button>
-        <button onclick="appendToDisplay('9')">9</button>
-        <button onclick="appendToDisplay('/')" class="operator-btn">/</button>
-        <button onclick="appendToDisplay('0')">0</button>
-        <button onclick="appendToDisplay('.')">.</button>
-        <button onclick="calculate()">=</button>
-        <button onclick="clearDisplay()" class="operator-btn">C</button>
-      </div>
-    </div>
+    <main class="app-shell">
+      <header class="app-header">
+        <h1>Engineering Multi-Calculator</h1>
+        <p>
+          A single workspace for everyday arithmetic, scientific operations, and
+          domain tools for civil and mechanical engineering.
+        </p>
+      </header>
+
+      <nav class="tabs" aria-label="Calculator Modes">
+        <button class="tab-btn active" data-tab="basic">Basic</button>
+        <button class="tab-btn" data-tab="scientific">Scientific</button>
+        <button class="tab-btn" data-tab="civil">Civil Engineering</button>
+        <button class="tab-btn" data-tab="mechanical">Mechanical</button>
+      </nav>
+
+      <section class="panel active" id="basic">
+        <h2>Basic Calculator</h2>
+        <input id="display" class="display" readonly aria-label="Basic display" />
+        <div id="keys" class="key-grid">
+          <button onclick="clearDisplay()" class="operator-btn">C</button>
+          <button onclick="deleteLast()" class="operator-btn">⌫</button>
+          <button onclick="appendToDisplay('(')" class="operator-btn">(</button>
+          <button onclick="appendToDisplay(')')" class="operator-btn">)</button>
+
+          <button onclick="appendToDisplay('7')">7</button>
+          <button onclick="appendToDisplay('8')">8</button>
+          <button onclick="appendToDisplay('9')">9</button>
+          <button onclick="appendToDisplay('/')" class="operator-btn">÷</button>
+
+          <button onclick="appendToDisplay('4')">4</button>
+          <button onclick="appendToDisplay('5')">5</button>
+          <button onclick="appendToDisplay('6')">6</button>
+          <button onclick="appendToDisplay('*')" class="operator-btn">×</button>
+
+          <button onclick="appendToDisplay('1')">1</button>
+          <button onclick="appendToDisplay('2')">2</button>
+          <button onclick="appendToDisplay('3')">3</button>
+          <button onclick="appendToDisplay('-')" class="operator-btn">−</button>
+
+          <button onclick="appendToDisplay('0')">0</button>
+          <button onclick="appendToDisplay('.')">.</button>
+          <button onclick="calculate()" class="equal-btn">=</button>
+          <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
+        </div>
+      </section>
+
+      <section class="panel" id="scientific">
+        <h2>Scientific Calculator</h2>
+        <p class="helper">Type a value and use buttons for trig/log/power operations.</p>
+        <input id="scientific-input" class="display" placeholder="Enter value" />
+        <div class="key-grid scientific-grid">
+          <button onclick="applyScientific('sin')">sin</button>
+          <button onclick="applyScientific('cos')">cos</button>
+          <button onclick="applyScientific('tan')">tan</button>
+          <button onclick="applyScientific('sqrt')">√x</button>
+          <button onclick="applyScientific('log')">log₁₀</button>
+          <button onclick="applyScientific('ln')">ln</button>
+          <button onclick="applyScientific('square')">x²</button>
+          <button onclick="applyScientific('cube')">x³</button>
+          <button onclick="applyScientific('inverse')">1/x</button>
+          <button onclick="applyScientific('exp')">eˣ</button>
+          <button onclick="applyScientific('pi')">π</button>
+          <button onclick="clearScientific()" class="operator-btn">Clear</button>
+        </div>
+        <p id="scientific-result" class="result-line">Result: —</p>
+      </section>
+
+      <section class="panel" id="civil">
+        <h2>Civil Engineering Utilities</h2>
+        <div class="card-grid">
+          <article class="tool-card">
+            <h3>Concrete Volume</h3>
+            <label>Length (m)<input id="conc-length" type="number" min="0" step="any" /></label>
+            <label>Width (m)<input id="conc-width" type="number" min="0" step="any" /></label>
+            <label>Depth (m)<input id="conc-depth" type="number" min="0" step="any" /></label>
+            <button onclick="calcConcreteVolume()">Calculate Volume</button>
+            <p id="conc-result" class="result-line">Volume: —</p>
+          </article>
+
+          <article class="tool-card">
+            <h3>Beam Load (UDL)</h3>
+            <label>Load intensity, w (kN/m)<input id="beam-w" type="number" min="0" step="any" /></label>
+            <label>Span, L (m)<input id="beam-l" type="number" min="0" step="any" /></label>
+            <button onclick="calcBeamLoad()">Calculate Reactions</button>
+            <p id="beam-result" class="result-line">Reaction at each support: —</p>
+          </article>
+
+          <article class="tool-card">
+            <h3>Brick Count Estimator</h3>
+            <label>Wall length (m)<input id="wall-length" type="number" min="0" step="any" /></label>
+            <label>Wall height (m)<input id="wall-height" type="number" min="0" step="any" /></label>
+            <label>Wall thickness (m)<input id="wall-thickness" type="number" min="0" step="any" /></label>
+            <button onclick="calcBrickCount()">Estimate Bricks</button>
+            <p id="brick-result" class="result-line">Estimated bricks: —</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="mechanical">
+        <h2>Mechanical Engineering Utilities</h2>
+        <div class="card-grid">
+          <article class="tool-card">
+            <h3>Power from Torque & Speed</h3>
+            <label>Torque, T (N·m)<input id="torque" type="number" min="0" step="any" /></label>
+            <label>Speed, N (rpm)<input id="rpm" type="number" min="0" step="any" /></label>
+            <button onclick="calcPower()">Calculate Power</button>
+            <p id="power-result" class="result-line">Power: —</p>
+          </article>
+
+          <article class="tool-card">
+            <h3>Thermal Expansion</h3>
+            <label>Initial length, L₀ (m)<input id="length0" type="number" min="0" step="any" /></label>
+            <label>Expansion coefficient, α (1/°C)<input id="alpha" type="number" min="0" step="any" /></label>
+            <label>Temperature change, ΔT (°C)<input id="deltaT" type="number" step="any" /></label>
+            <button onclick="calcExpansion()">Calculate ΔL</button>
+            <p id="expansion-result" class="result-line">Expansion: —</p>
+          </article>
+
+          <article class="tool-card">
+            <h3>Kinetic Energy</h3>
+            <label>Mass, m (kg)<input id="mass" type="number" min="0" step="any" /></label>
+            <label>Velocity, v (m/s)<input id="velocity" type="number" min="0" step="any" /></label>
+            <button onclick="calcKineticEnergy()">Calculate Energy</button>
+            <p id="ke-result" class="result-line">Kinetic Energy: —</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="index.js"></script>
   </body>
-  <script src="index.js"></script>
 </html>

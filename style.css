@@ -1,65 +1,165 @@
+:root {
+  --bg: #0f172a;
+  --surface: #111827;
+  --surface-2: #1f2937;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #f59e0b;
+  --accent-2: #22c55e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: hsl(0, 0%, 95%);
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: radial-gradient(circle at top, #1e293b, var(--bg));
+  color: var(--text);
 }
 
-#calculator {
-    font-family: Arial, sans-serif;
-    background-color: hsl(0, 0%, 15%);
-    border-radius: 15px;
-    max-width: 500px;
-    overflow: hidden;
+.app-shell {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.5rem;
 }
 
-#display {
-    width: 100%;
-    padding: 20px;
-    font-size: 5rem;
-    text-align: left;
-    border: none;
-    background-color: hsl(0, 0%, 20%);
-    color: white;
+.app-header h1 {
+  margin: 0;
 }
 
-#keys {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    padding: 25px;
+.app-header p {
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.tab-btn {
+  border: 1px solid #374151;
+  color: var(--text);
+  background: var(--surface);
+  padding: 0.8rem;
+  border-radius: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  color: #111827;
+  border-color: transparent;
+}
+
+.panel {
+  display: none;
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid #374151;
+  border-radius: 1rem;
+  padding: 1.2rem;
+}
+
+.panel.active {
+  display: block;
+}
+
+.display {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1.35rem;
+  border-radius: 0.6rem;
+  border: 1px solid #4b5563;
+  background: #0b1220;
+  color: #f8fafc;
+  margin-bottom: 1rem;
+}
+
+.key-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(64px, 1fr));
+  gap: 0.55rem;
 }
 
 button {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    border: none;
-    background-color: hsl(0, 0%, 30%);
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    cursor: pointer;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: hsl(0, 0%, 40%);
-}
-
-button:active {
-    background-color: hsl(0, 0%, 50%);
+  filter: brightness(1.12);
 }
 
 .operator-btn {
-    background-color: hsl(35, 100%, 55%);
+  background: #374151;
 }
 
-.operator-btn:hover {
-    background-color: hsl(35, 100%, 65%);
+.equal-btn {
+  background: var(--accent-2);
+  color: #052e16;
 }
 
-.operator-btn:active {
-    background-color: hsl(35, 100%, 75%);
+.helper,
+.result-line {
+  color: var(--muted);
+}
+
+.scientific-grid {
+  margin-bottom: 0.75rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  border: 1px solid #334155;
+  border-radius: 0.9rem;
+  padding: 1rem;
+  background: #0b1220;
+}
+
+.tool-card h3 {
+  margin-top: 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+
+input[type="number"] {
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 0.45rem;
+  color: var(--text);
+  padding: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    margin: 1rem auto;
+    padding: 0.85rem;
+  }
+
+  .key-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
